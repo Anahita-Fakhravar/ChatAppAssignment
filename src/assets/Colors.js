@@ -3,7 +3,7 @@
 export const Colors = {
 
     darkTheme: '#003366',
-    mediumTheme: '#A03737',
+    mediumTheme: '#ff6303',
     lightTheme: '#F9F871',
 
     lightBackGround: '#F6F8F8',
