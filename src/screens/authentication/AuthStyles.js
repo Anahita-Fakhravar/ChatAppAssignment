@@ -40,7 +40,7 @@ export const AuthStyles = {
         ref: input => useRef.email = input,
         returnKeyType: 'next',
         name: "email",
-        keyboardType: "email",
+        keyboardType: "email-address",
         secureTextEntry: false,
         autoCorrect: false,
     },

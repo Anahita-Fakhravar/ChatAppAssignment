@@ -7,10 +7,15 @@ import { Formik } from 'formik'
 import { authValidationSchema } from '../../functions/Validations';
 import { ScreensName } from '../../ScreensName';
 import { Strings } from './../../assets/Strings';
-import { CustomBtn} from './../../components/CustomBtn';
+import { CustomBtn } from './../../components/CustomBtn';
 import { AuthStyles } from './AuthStyles';
 
 const AuthScreen = () => {
+
+    function _register(value) {
+
+        console.log('register data', value)
+    }
 
     return (
 
@@ -19,7 +24,7 @@ const AuthScreen = () => {
             <Formik
                 validationSchema={authValidationSchema}
                 initialValues={{ email: '', password: '' }}
-                onSubmit={values => navigation.navigate(ScreensName.HomeScreen)}
+                onSubmit={values => _register(values)}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors,
                     touched }) => (
