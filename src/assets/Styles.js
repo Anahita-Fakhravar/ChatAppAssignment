@@ -28,6 +28,10 @@ export const txtFont = {
         fontSize: responsiveFontSize(2),
         fontWeight: 'bold'
     },
+    extraLarge:{
+        fontSize: responsiveFontSize(10),
+        fontWeight: 'bold'
+    }
 
 }
 
