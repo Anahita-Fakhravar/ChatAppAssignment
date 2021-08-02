@@ -49,7 +49,6 @@ export const AuthStyles = {
         ref: input => useRef.password = input,
         returnKeyType: 'done',
         name: "password",
-        keyboardType: "password",
         secureTextEntry: true,
         autoCorrect: false,
     },
