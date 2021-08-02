@@ -8,6 +8,10 @@ export const Strings = {
   emptyEmail: 'Please enter your email address.',
 
   //General
+  appName: 'IFS',
+  programmer:'Programmer',
+  programmerName:'Anahita Fakhravar',
+  description:'Helps you to smile...',
   confirm: 'Confirm',
 
   //Authentication
