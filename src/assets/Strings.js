@@ -4,18 +4,19 @@ export const Strings = {
 
   //Messages
   wrongEmail: 'Invalid email address!',
-  emptyFullName: 'Please enter your full name.',
   emptyEmail: 'Please enter your email address.',
+  emptyPassword: 'Please enter your password.',
 
   //General
   appName: 'IFS',
-  programmer:'Programmer',
-  programmerName:'Anahita Fakhravar',
-  description:'Helps you to smile...',
+  programmer: 'Programmer',
+  programmerName: 'Anahita Fakhravar',
+  description: 'Helps you to smile...',
   confirm: 'Confirm',
 
   //Authentication
-  fullName: 'Full name',
+  password: 'Password',
   email: 'Email',
+  enterChatRoom: 'Enter to chat room'
 
 };
