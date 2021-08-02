@@ -1,8 +1,9 @@
 //Auth screen design 
 
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Alert, } from 'react-native';
 import { Formik } from 'formik'
+import auth from "@react-native-firebase/auth"
 
 import { authValidationSchema } from '../../functions/Validations';
 import { ScreensName } from '../../ScreensName';
@@ -10,12 +11,28 @@ import { Strings } from './../../assets/Strings';
 import { CustomBtn } from './../../components/CustomBtn';
 import { AuthStyles } from './AuthStyles';
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }) => {
 
-    function _register(value) {
 
-        console.log('register data', value)
-    }
+    /*   const _register = async (values) => {
+          console.warn('Anahita', values.email,values.password);
+           auth().createUserWithEmailAndPassword(values.email,values.password)
+              .then(() => {
+                  console.warn('Anahita User account created & signed in!');
+              })
+              .catch(error => {
+                  if (error.code === 'auth/email-already-in-use') {
+                      console.warn('Anahita That email address is already in use!');
+                  }
+  
+                  if (error.code === 'auth/invalid-email') {
+                      console.warn('Anahita That email address is invalid!');
+                  }
+  
+                  console.warn('Anahita Error');
+              });
+  
+      } */
 
     return (
 
@@ -24,7 +41,8 @@ const AuthScreen = () => {
             <Formik
                 validationSchema={authValidationSchema}
                 initialValues={{ email: '', password: '' }}
-                onSubmit={values => _register(values)}
+                //   onSubmit={values => _register(values)}
+                onSubmit={values => navigation.navigate('ChatScreen')}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors,
                     touched }) => (
@@ -65,7 +83,7 @@ const AuthScreen = () => {
                 )}
             </Formik>
 
-        </View>
+        </View >
     )
 }
 export default AuthScreen

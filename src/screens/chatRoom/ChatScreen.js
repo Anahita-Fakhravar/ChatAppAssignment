@@ -1,15 +1,23 @@
 //Chat screen design 
 
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { KeyboardAvoidingView, Platform, SafeAreaView, View } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat'
 
 const ChatScreen = () => {
 
-    return (
-        <View>
-            <Text>ChatScreen</Text>
-        </View>
-    )
+  const [recvMessages, setRecvMessages] = useState([])
 
+  return (
+    <GiftedChat
+      renderUsernameOnMessage
+      messages={recvMessages}
+      onSend={messages => console.log('d')}
+      user={{
+        _id: 1,
+      }}
+    />
+  )
 }
+
 export default ChatScreen
