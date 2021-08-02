@@ -1,12 +1,12 @@
 //Custom button
 
 import React from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { TouchableOpacity, Text, View, ActivityIndicator } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { txtFont } from "../assets/Styles"
 import { SvgXml } from 'react-native-svg';
 
-const CustomBtn = (Props) => {
+export const CustomBtn = (Props) => {
 
     return (
         <TouchableOpacity
@@ -24,24 +24,31 @@ const CustomBtn = (Props) => {
                 marginRight: responsiveWidth(Props.btnMargin[2]),
                 marginLeft: responsiveWidth(Props.btnMargin[3]),
                 flexDirection: 'row',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                alignSelf:'center',
             }}>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{
-                    color: Props.btnTitleColor,
-                    ...txtFont.smallBlackFont
-                }}>{Props.btnTitle}</Text>
-                {Props.hasIcon && <SvgXml xml={Props.iconName}
-                    width={responsiveWidth(4.5)}
-                    height={responsiveWidth(4.5)}
-                    marginLeft={responsiveWidth(2)}
-                />}
-            </View>
+            {Props.isLoading ?
+
+                <ActivityIndicator size="small" color={Props.btnTitleColor} animating={Props.isLoading} /> :
+
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{
+                        color: Props.btnTitleColor,
+                        ...txtFont.smallBoldFont
+                    }}>{Props.btnTitle}</Text>
+                    {Props.hasIcon && <SvgXml xml={Props.iconName}
+                        width={responsiveWidth(4.5)}
+                        height={responsiveWidth(4.5)}
+                        marginLeft={responsiveWidth(2)}
+                    />}
+                </View>
+            }
+
+
 
         </TouchableOpacity>
     );
 
 };
 
-export default CustomBtn;
