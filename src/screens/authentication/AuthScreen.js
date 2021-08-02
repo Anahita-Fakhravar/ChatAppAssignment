@@ -3,10 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, Alert, } from 'react-native';
 import { Formik } from 'formik'
-import auth from "@react-native-firebase/auth"
-
 import { authValidationSchema } from '../../functions/Validations';
-import { ScreensName } from '../../ScreensName';
 import { Strings } from './../../assets/Strings';
 import { CustomBtn } from './../../components/CustomBtn';
 import { AuthStyles } from './AuthStyles';
