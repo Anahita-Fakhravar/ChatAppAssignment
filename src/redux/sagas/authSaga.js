@@ -1,29 +1,49 @@
+import { all, put, takeLatest, call } from 'redux-saga/effects';
+import {
+    signUp,
+    signUpSuccess,
+    signUpFailure
+} from './../reducers/authReducer';
+import firebase from '../../firebase/config';
 
-/* ***************IMPORTANT************************
-This is just to show saga implementation.
-In a real project I use it to call multiple 
-web services api or when result of one web service 
-api has to be used as a input of another one or when
-several tasks have to be done sequentially and ...
-*/
 
-import { all, put, takeLatest } from 'redux-saga/effects';
-import { authStatus } from '../reducers/authReducer';
+const authSaga = function* (action) {
+    console.warn('test saga ana -1', action.payload)
 
-const authCallApi = function* (action) {
+    try {
+        const auth = firebase.auth()
+        const result = yield call(
+            [auth, auth.createUserWithEmailAndPassword],
+            action.payload.email,
+            action.payload.password
+        )
+        console.log('result saga ana', result.user.uid)
+        yield put({
+            payload: {
+                status: 'success',
+                email: result.user.email,
+                uid: result.user.uid
+            }, type: signUpSuccess.type,
+        });
 
-    yield put({
-        payload: {
-            email: action.payload.email
-        }, type: authStatus.type
-    })
+    } catch (error) {
+
+        yield put({
+            payload: {
+                message: error.code,
+            }, type: signUpFailure.type,
+        });
+
+    }
+
+
 
 };
 
 export function* authCallApiWatcher() {
 
-  /*   yield all([
-        yield takeLatest(authStatus.type, authCallApi),
-    ]); */
- 
+    yield all([
+        yield takeLatest(signUp.type, authSaga),
+    ]);
+
 };

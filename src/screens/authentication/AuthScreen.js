@@ -8,42 +8,21 @@ import { Strings } from './../../assets/Strings';
 import { CustomBtn } from './../../components/CustomBtn';
 import { AuthStyles } from './AuthStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import { authStatus } from '../../redux/reducers/authReducer';
-import firebase from '../../firebase/config';
+import { signUp } from '../../redux/reducers/authReducer';
+//import firebase from '../../firebase/config';
 
 const AuthScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
-    const authData = useSelector(state => state.authReducer)
+    const signUpData = useSelector(state => state.authReducer)
 
-    console.log('test saga ana 1000', authData)
+    console.warn('test saga ana 1000', signUpData)
 
-    const _register = async (email, password) => {
-        console.log('Anahita', email, password);
-        await firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((data) => {
+    useEffect(() => {
+        signUpData.status === 'success' && navigation.navigate('ChatScreen')
+        signUpData.status === 'fail' && Alert.alert(signUpData.message)
 
-                console.warn("User ID :- ", data.user.uid);
-                // navigation.navigate('ChatScreen')
-            })
-            .catch(error => {
-                if (error.code === 'auth/email-already-in-use') {
-                    Alert.alert('Anahita That email address is already in use!')
-                }
-
-                if (error.code === 'auth/invalid-email') {
-
-                    Alert.alert('Anahita That email address is invalid!')
-                }
-
-                if (error.code === 'auth/network-request-failed') {
-
-                    Alert.alert('Network problem!')
-                }
-                console.warn('anahita error', error.code)
-            });
-
-    }
+    }, [signUpData.status])
 
     return (
 
@@ -52,7 +31,7 @@ const AuthScreen = ({ navigation }) => {
             <Formik
                 validationSchema={authValidationSchema}
                 initialValues={{ email: '', password: '' }}
-                onSubmit={values => _register(values.email, values.password)}
+                onSubmit={values => dispatch(signUp({ email: values.email, password: values.password }))}
             // onSubmit={values => navigation.navigate('ChatScreen')}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors,
@@ -87,7 +66,7 @@ const AuthScreen = ({ navigation }) => {
                         <CustomBtn
                             btnOnPress={handleSubmit}
                             {...AuthStyles.confirmBtn}
-                        //  isLoading={loading}
+                            isLoading={signUpData.loading}
                         />
                     </>
                 )}
