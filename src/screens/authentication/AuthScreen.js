@@ -7,29 +7,43 @@ import { authValidationSchema } from '../../functions/Validations';
 import { Strings } from './../../assets/Strings';
 import { CustomBtn } from './../../components/CustomBtn';
 import { AuthStyles } from './AuthStyles';
+import { useDispatch, useSelector } from 'react-redux';
+import { authStatus } from '../../redux/reducers/authReducer';
+import firebase from '../../firebase/config';
 
 const AuthScreen = ({ navigation }) => {
 
+    const dispatch = useDispatch()
+    const authData = useSelector(state => state.authReducer)
 
-    /*   const _register = async (values) => {
-          console.warn('Anahita', values.email,values.password);
-           auth().createUserWithEmailAndPassword(values.email,values.password)
-              .then(() => {
-                  console.warn('Anahita User account created & signed in!');
-              })
-              .catch(error => {
-                  if (error.code === 'auth/email-already-in-use') {
-                      console.warn('Anahita That email address is already in use!');
-                  }
-  
-                  if (error.code === 'auth/invalid-email') {
-                      console.warn('Anahita That email address is invalid!');
-                  }
-  
-                  console.warn('Anahita Error');
-              });
-  
-      } */
+    console.log('test saga ana 1000', authData)
+
+    const _register = async (email, password) => {
+        console.log('Anahita', email, password);
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((data) => {
+
+                console.warn("User ID :- ", data.user.uid);
+                // navigation.navigate('ChatScreen')
+            })
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    Alert.alert('Anahita That email address is already in use!')
+                }
+
+                if (error.code === 'auth/invalid-email') {
+
+                    Alert.alert('Anahita That email address is invalid!')
+                }
+
+                if (error.code === 'auth/network-request-failed') {
+
+                    Alert.alert('Network problem!')
+                }
+                console.warn('anahita error', error.code)
+            });
+
+    }
 
     return (
 
@@ -38,13 +52,12 @@ const AuthScreen = ({ navigation }) => {
             <Formik
                 validationSchema={authValidationSchema}
                 initialValues={{ email: '', password: '' }}
-                //   onSubmit={values => _register(values)}
-                onSubmit={values => navigation.navigate('ChatScreen')}
+                onSubmit={values => _register(values.email, values.password)}
+            // onSubmit={values => navigation.navigate('ChatScreen')}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors,
                     touched }) => (
                     <>
-
                         <Text style={AuthStyles.labelTxt}>{Strings.email}:</Text>
 
                         <TextInput
