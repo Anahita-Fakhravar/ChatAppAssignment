@@ -14,9 +14,7 @@ const authCallApi = function* (action) {
 
     yield put({
         payload: {
-            isLogin: false,
-            mobile: '',
-            fullName: '',
+            email: action.payload.email
         }, type: authStatus.type
     })
 
@@ -24,8 +22,8 @@ const authCallApi = function* (action) {
 
 export function* authCallApiWatcher() {
 
-    yield all([
+  /*   yield all([
         yield takeLatest(authStatus.type, authCallApi),
-    ]);
-
+    ]); */
+ 
 };

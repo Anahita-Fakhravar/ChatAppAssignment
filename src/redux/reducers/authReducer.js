@@ -4,7 +4,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     email: '',
-    fullName: '',
 }
 
 const AuthSlice = createSlice({
@@ -15,13 +14,11 @@ const AuthSlice = createSlice({
         clearAuth(state) {
             Object.assign(state, {
                 email: '',
-                fullName: '',
             })
         },
         //Authentication status
         authStatus(state, action) {
             state.email = action.payload.email;
-            state.fullName = action.payload.fullName;
         },
     }
 });
