@@ -6,6 +6,7 @@ export const Strings = {
   wrongEmail: 'Invalid email address!',
   emptyEmail: 'Please enter your email address.',
   emptyPassword: 'Please enter your password.',
+  someError:'Some error occurred, Please try again',
 
   //General
   appName: 'IFS',
