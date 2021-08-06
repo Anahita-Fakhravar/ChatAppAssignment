@@ -3,11 +3,11 @@ import {
     signUp,
     signUpSuccess,
     signUpFailure
-} from './../reducers/authReducer';
+} from './../reducers/signUpReducer';
 import firebase from '../../firebase/config';
 
 
-const authSaga = function* (action) {
+const signUpSaga = function* (action) {
     console.warn('test saga ana -1', action.payload)
 
     try {
@@ -40,10 +40,10 @@ const authSaga = function* (action) {
 
 };
 
-export function* authCallApiWatcher() {
+export function* signUpCallApiWatcher() {
 
     yield all([
-        yield takeLatest(signUp.type, authSaga),
+        yield takeLatest(signUp.type, signUpSaga),
     ]);
 
 };

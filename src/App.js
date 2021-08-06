@@ -42,8 +42,8 @@ function App() {
                     <>
 
                         <Stack.Navigator>
-                            <Stack.Screen name="AuthScreen" component={ScreensName.AuthScreen}
-                                options={stackOptions} />
+                            <Stack.Screen name="SignUpScreen" component={ScreensName.SignUpScreen}
+                                options={stackOptions} /> 
 
                             <Stack.Screen name="ChatScreen" component={ScreensName.ChatScreen}
                                 options={stackOptions} />

@@ -1,11 +1,11 @@
 //Authentication styles
 import React, { useRef } from 'react';
-import { Strings } from './../../assets/Strings';
+import { Strings } from '../../assets/Strings';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
-import { Colors } from './../../assets/Colors';
+import { Colors } from '../../assets/Colors';
 import { txtFont } from '../../assets/Styles';
 
-export const AuthStyles = {
+export const SignUpStyles = {
 
     container: {
         flex: 1,

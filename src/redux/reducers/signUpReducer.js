@@ -1,4 +1,4 @@
-//AuthReducer
+//SignUpReducer
 
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -10,12 +10,12 @@ const initialState = {
     uid: null
 }
 
-const AuthSlice = createSlice({
+const SignUpSlice = createSlice({
 
-    name: 'Auth',
+    name: 'SignUp',
     initialState,
     reducers: {
-        clearAuth(state) {
+        clearSignUp(state) {
             Object.assign(state, {
                 loading: false,
                 status: '',
@@ -24,7 +24,7 @@ const AuthSlice = createSlice({
                 uid: null
             })
         },
-        //Authentication status
+        //SignUpentication status
         signUp(state, action) {
             state.loading = true;
         },
@@ -47,11 +47,11 @@ const AuthSlice = createSlice({
 
 export const {
 
-    clearAuth,
+    clearSignUp,
     signUp,
     signUpSuccess,
     signUpFailure
 
-} = AuthSlice.actions;
+} = SignUpSlice.actions;
 
-export default AuthSlice.reducer
+export default SignUpSlice.reducer

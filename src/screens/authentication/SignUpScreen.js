@@ -4,17 +4,17 @@ import React, { useRef, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, Alert, } from 'react-native';
 import { Formik } from 'formik'
 import { authValidationSchema } from '../../functions/Validations';
-import { Strings } from './../../assets/Strings';
-import { CustomBtn } from './../../components/CustomBtn';
-import { AuthStyles } from './AuthStyles';
+import { Strings } from '../../assets/Strings';
+import { CustomBtn } from '../../components/CustomBtn';
+import { SignUpStyles } from './SignUpStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUp } from '../../redux/reducers/authReducer';
+import { signUp } from '../../redux/reducers/signUpReducer';
 //import firebase from '../../firebase/config';
 
-const AuthScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
-    const signUpData = useSelector(state => state.authReducer)
+    const signUpData = useSelector(state => state.signUpReducer)
 
     console.warn('test saga ana 1000', signUpData)
 
@@ -26,7 +26,7 @@ const AuthScreen = ({ navigation }) => {
 
     return (
 
-        <View style={AuthStyles.container}>
+        <View style={SignUpStyles.container}>
 
             <Formik
                 validationSchema={authValidationSchema}
@@ -37,35 +37,35 @@ const AuthScreen = ({ navigation }) => {
                 {({ handleChange, handleBlur, handleSubmit, values, errors,
                     touched }) => (
                     <>
-                        <Text style={AuthStyles.labelTxt}>{Strings.email}:</Text>
+                        <Text style={SignUpStyles.labelTxt}>{Strings.email}:</Text>
 
                         <TextInput
-                            {...AuthStyles.emailTxtInput}
+                            {...SignUpStyles.emailTxtInput}
                             onSubmitEditing={() => useRef.password.focus()}
-                            style={AuthStyles.txtInput}
+                            style={SignUpStyles.txtInput}
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             value={values.email}
                         />
 
-                        {(errors.email && touched.email) && <Text style={AuthStyles.errorTxt}>{errors.email}</Text>}
+                        {(errors.email && touched.email) && <Text style={SignUpStyles.errorTxt}>{errors.email}</Text>}
 
-                        <Text style={AuthStyles.labelTxt}>{Strings.password}:</Text>
+                        <Text style={SignUpStyles.labelTxt}>{Strings.password}:</Text>
 
                         <TextInput
-                            {...AuthStyles.passwordTxtInput}
-                            style={AuthStyles.txtInput}
+                            {...SignUpStyles.passwordTxtInput}
+                            style={SignUpStyles.txtInput}
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
                             value={values.password}
                             onSubmitEditing={handleSubmit}
                         />
 
-                        {(errors.password && touched.password) && <Text style={AuthStyles.errorTxt}>{errors.password}</Text>}
+                        {(errors.password && touched.password) && <Text style={SignUpStyles.errorTxt}>{errors.password}</Text>}
 
                         <CustomBtn
                             btnOnPress={handleSubmit}
-                            {...AuthStyles.confirmBtn}
+                            {...SignUpStyles.confirmBtn}
                             isLoading={signUpData.loading}
                         />
                     </>
@@ -75,4 +75,4 @@ const AuthScreen = ({ navigation }) => {
         </View >
     )
 }
-export default AuthScreen
+export default SignUpScreen

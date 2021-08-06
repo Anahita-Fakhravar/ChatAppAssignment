@@ -2,10 +2,10 @@
 
 import { all } from 'redux-saga/effects';
 
-import { authCallApiWatcher } from './authSaga'
+import { signUpCallApiWatcher } from './signUpSaga'
 
 export default function* rootSaga() {
     yield all([
-        authCallApiWatcher(),
+        signUpCallApiWatcher(),
     ])
 }
