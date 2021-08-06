@@ -6,7 +6,6 @@ import {
 } from './../reducers/signUpReducer';
 import firebase from '../../firebase/config';
 
-
 const signUpSaga = function* (action) {
 
     const auth = firebase.auth()

@@ -9,7 +9,6 @@ import { CustomBtn } from '../../components/CustomBtn';
 import { SignUpStyles } from './SignUpStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp } from '../../redux/reducers/signUpReducer';
-//import firebase from '../../firebase/config';
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -30,7 +29,6 @@ const SignUpScreen = ({ navigation }) => {
                 validationSchema={authValidationSchema}
                 initialValues={{ email: '', password: '' }}
                 onSubmit={values => dispatch(signUp({ email: values.email, password: values.password }))}
-            // onSubmit={values => navigation.navigate('ChatScreen')}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors,
                     touched }) => (
