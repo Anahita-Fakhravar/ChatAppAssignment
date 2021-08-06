@@ -6,10 +6,8 @@ import {
 } from './../reducers/usersReducer';
 import firebase from '../../firebase/config';
 
-
 const usersSaga = function* (action) {
-    console.warn('test saga ana -1', action.payload)
-
+  
     try {
         const auth = firebase.auth()
         const result = yield call(

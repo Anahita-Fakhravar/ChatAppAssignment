@@ -16,8 +16,6 @@ const SignUpScreen = ({ navigation }) => {
     const dispatch = useDispatch()
     const signUpData = useSelector(state => state.signUpReducer)
 
-    console.warn('test saga ana 1000', signUpData)
-
     useEffect(() => {
         signUpData.status === 'success' && navigation.navigate('ChatScreen')
         signUpData.status === 'fail' && Alert.alert(signUpData.message)

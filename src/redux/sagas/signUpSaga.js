@@ -8,16 +8,14 @@ import firebase from '../../firebase/config';
 
 
 const signUpSaga = function* (action) {
-    console.warn('test saga ana -1', action.payload)
 
+    const auth = firebase.auth()
     try {
-        const auth = firebase.auth()
         const result = yield call(
-            [auth, auth.createUserWithEmailAndPassword],
+            [auth, auth.signInWithEmailAndPassword],
             action.payload.email,
             action.payload.password
         )
-        console.log('result saga ana', result.user.uid)
         yield put({
             payload: {
                 status: 'success',
@@ -25,15 +23,38 @@ const signUpSaga = function* (action) {
                 uid: result.user.uid
             }, type: signUpSuccess.type,
         });
-
     } catch (error) {
 
-        yield put({
-            payload: {
-                message: error.code,
-            }, type: signUpFailure.type,
-        });
+        if (error.code === 'auth/user-not-found') {
 
+            try {
+                const result = yield call(
+                    [auth, auth.createUserWithEmailAndPassword],
+                    action.payload.email,
+                    action.payload.password
+                )
+                yield put({
+                    payload: {
+                        status: 'success',
+                        email: result.user.email,
+                        uid: result.user.uid
+                    }, type: signUpSuccess.type,
+                });
+            } catch (error) {
+                yield put({
+                    payload: {
+                        message: error.code,
+                    }, type: signUpFailure.type,
+                });
+            }
+        } else {
+
+            yield put({
+                payload: {
+                    message: error.code,
+                }, type: signUpFailure.type,
+            });
+        }
     }
 
 

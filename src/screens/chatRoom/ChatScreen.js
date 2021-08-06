@@ -6,6 +6,8 @@ import { Strings } from './../../assets/Strings';
 import MessageItem from './../../components/MessageItem';
 import MessageFieldView from './../../components/MessageFieldView';
 import firebase from './../../firebase/config';
+import { useSelector } from 'react-redux';
+
 
 const firestore = firebase.firestore()
 
@@ -13,21 +15,20 @@ function ChatScreen({ route, navigation }) {
 
     const [messageList, setMessageList] = useState([])
     const [message, setMessage] = useState('')
+    const userData = useSelector(state => state.signUpReducer)
 
-    const item = { groupID: 'L1KS1jgv6Leswel1KQkFjcb76QS2' }
-    const userID = firebase.auth().currentUser.uid
+   // const userID = firebase.auth().currentUser.uid
 
     useEffect(() => {
-        console.log(item)
+   
         getMessages()
     }, [])
-
 
     function getMessages() {
         const db = firestore
         var messages = []
 
-        db.collection("message").doc(item.groupID).collection("messages")
+        db.collection("message").doc('L1KS1jgv6Leswel1KQkFjcb76QS2').collection("messages")
             .onSnapshot(function (snapshot) {
                 snapshot.docChanges().forEach(function (change) {
                     if (change.type === "added") {
@@ -47,13 +48,13 @@ function ChatScreen({ route, navigation }) {
     }
 
     function sendMessagesToChat() {
-        const messageRef = firestore.collection("message").doc(item.groupID).collection("messages").doc()
+        const messageRef = firestore.collection("message").doc('L1KS1jgv6Leswel1KQkFjcb76QS2').collection("messages").doc()
         const userEmail = firebase.auth().currentUser.email
 
         messageRef.set({
             messageID: messageRef.id,
             message: message,
-            senderId: userID,
+            senderId: userData.uid,
             senderEmail: userEmail
         }).then(function (docRef) {
             console.log("Document written with ID: ", messageRef.id)
