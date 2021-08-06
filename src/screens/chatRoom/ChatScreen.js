@@ -93,7 +93,6 @@ function ChatScreen({ route, navigation }) {
                             onTermChange={message => setMessage(message)}
                             onSubmit={sendMessagesToChat}
                         >
-
                         </MessageFieldView>
 
                     </View>
