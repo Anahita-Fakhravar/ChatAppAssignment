@@ -27,20 +27,13 @@ function ChatScreen({ route, navigation }) {
     function getMessages() {
         const db = firestore
         var messages = []
-
-        db.collection("message").doc('L1KS1jgv6Leswel1KQkFjcb76QS2').collection("messages")
+        db.collection("message").doc('J95Bpn0ZJlPBZo2SQOEPuCXkwJ13').collection("messages")
             .onSnapshot(function (snapshot) {
                 snapshot.docChanges().forEach(function (change) {
                     if (change.type === "added") {
                         console.log("New Message: ", change.doc.data())
                         messages.push(change.doc.data())
-
-                    }
-                    if (change.type === "modified") {
-                        console.log("Modified Message", change.doc.data())
-                    }
-                    if (change.type === "removed") {
-                        console.log("Removed Message:", change.doc.data())
+                        setMessage('')
                     }
                     setMessageList(messages)
                 })
@@ -48,9 +41,8 @@ function ChatScreen({ route, navigation }) {
     }
 
     function sendMessagesToChat() {
-        const messageRef = firestore.collection("message").doc('L1KS1jgv6Leswel1KQkFjcb76QS2').collection("messages").doc()
+        const messageRef = firestore.collection("message").doc('J95Bpn0ZJlPBZo2SQOEPuCXkwJ13').collection("messages").doc()
         const userEmail = firebase.auth().currentUser.email
-
         messageRef.set({
             messageID: messageRef.id,
             message: message,
