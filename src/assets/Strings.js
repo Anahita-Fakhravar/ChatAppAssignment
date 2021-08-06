@@ -18,6 +18,9 @@ export const Strings = {
   //Authentication
   password: 'Password',
   email: 'Email',
-  enterChatRoom: 'Enter to chat room'
+  enterChatRoom: 'Enter to chat room',
+
+  //Chat
+  send:'send',
 
 };
